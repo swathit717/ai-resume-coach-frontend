@@ -14,8 +14,12 @@ function App() {
     const formData = new FormData();
     formData.append("file", file);
 
+    // Get the backend URL from the environment variable
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
     try {
-      const response = await axios.post("http://127.0.0.1:5000/upload", formData);
+      // Use the backendUrl in the axios post request
+      const response = await axios.post(`${backendUrl}/upload`, formData);
       setAnalysis(response.data.analysis);
     } catch (err) {
       alert("Error analyzing resume");
